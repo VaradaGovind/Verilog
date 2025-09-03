@@ -1,0 +1,6 @@
+Time resolution is 1 ps
+Read Data at Addr 5 (Port A): f0
+Read Data at Addr 10 (Port B): 0f
+Read Data at Addr 15 (Port A): f0
+Read Data at Addr 20 (Port B): 0f
+$stop called at time : 100 ns : File "C:/Users/Varada Govind/Documents/Coding/Verilog/Memories/Dual Port Ram/Dual Port Ram.srcs/sim_1/new/Test_Bench.v" Line 56
