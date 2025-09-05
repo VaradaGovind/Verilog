@@ -12,6 +12,8 @@
         output reg [7:0]Output_b
         );
         
+        //Better Version
+        
         reg [7:0] ram[63:0];
         
         always @(posedge Clk) begin
