@@ -1,36 +1,31 @@
-#-------------------------------
-# Verilog + Vivado .gitignore
-# Keeps source & images only
-#-------------------------------
+#-----------------------------------
+# Verilog + Vivado (Safe Version)
+# Keeps Verilog source/testbench files
+#-----------------------------------
 
-# Vivado auto-generated folders
+# Ignore Vivado-generated folders
 *.cache/
 *.hw/
 *.ip_user_files/
-*.sim/
 *.runs/
-*.srcs/
 *.data/
 *.xsa/
 *.dcp/
 *.ip/
 *.xci/
-
-# Vivado project/session files
-*.xpr
-*.log
-*.jou
 *.backup.log
 *.backup.jou
 
-# Simulation output files
-*.wlf
+# Simulation outputs
 *.vcd
-*.rpt
+*.wlf
+*.log
+*.jou
+transcript
 *.pb
+*.rpt
 *.tcl.history
 *.tclbackup
-transcript
 work/
 obj_dir/
 
@@ -41,22 +36,26 @@ obj_dir/
 *.bak
 *.DS_Store
 
-# Optional: ignore waveform dump images (if unwanted)
-# Uncomment below if you don’t want screenshots tracked
-# *.png
-# *.jpg
-# *.jpeg
+# -----------------------------
+# KEEP source and testbench files
+# -----------------------------
+!*.v
+!*.vh
+!*.sv
+!*.svh
 
-# Keep your manually added circuit/simulation images
+# Keep images and documentation
 !*.png
 !*.jpg
 !*.jpeg
+!*.md
 
-# Optional folders for organization
-!Images/
-!Designs/
-!Testbench/
+# Keep project structure
+!.gitignore
+!README.md
 
-# Python or script cache (if automation used)
-__pycache__/
-*.pyc
+# Keep .srcs and .sim folders but ignore their internal Vivado junk
+!*/.srcs/
+!*/.sim/
+!*/.srcs/**/
+!*/.sim/**/
