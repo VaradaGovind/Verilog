@@ -1,89 +1,62 @@
-#------------------------------------
-# Verilog / HDL Project .gitignore
-#------------------------------------
+#-------------------------------
+# Verilog + Vivado .gitignore
+# Keeps source & images only
+#-------------------------------
 
-# Project build and simulation files
-*.vcd
-*.wlf
-*.log
-*.jou
-*.pb
-*.rpt
-*.rpx
-*.xpr
-*.str
-*.svf
-*.key
-*.xml
-*.xrf
-*.xsa
-*.dcp
-*.dmp
-*.tcl.history
-*.tclbackup
-
-# Vivado / Xilinx specific
-*.runs/
-*.srcs/
+# Vivado auto-generated folders
 *.cache/
 *.hw/
 *.ip_user_files/
 *.sim/
-*.xdc~
-*.ip/
-*.xci
-*.xise/
+*.runs/
+*.srcs/
 *.data/
-*.bin
-*.elf
-*.mif
-*.bd.bak
-*.bit
+*.xsa/
+*.dcp/
+*.ip/
+*.xci/
 
-# ModelSim / QuestaSim specific
-work/
-transcript
-vsim.wlf
+# Vivado project/session files
+*.xpr
+*.log
+*.jou
+*.backup.log
+*.backup.jou
+
+# Simulation output files
 *.wlf
-*.vstf
-
-# Icarus Verilog / Verilator output
-a.out
-*.out
-*.vvp
 *.vcd
+*.rpt
+*.pb
+*.tcl.history
+*.tclbackup
+transcript
+work/
 obj_dir/
 
-# Temporary / editor files
+# Temporary/editor files
 *~
 *.swp
-*.bak
 *.tmp
+*.bak
 *.DS_Store
 
-# Simulation and waveform images
-*.png
-*.jpg
-*.jpeg
-*.bmp
-*.gif
-*.svg
+# Optional: ignore waveform dump images (if unwanted)
+# Uncomment below if you don’t want screenshots tracked
+# *.png
+# *.jpg
+# *.jpeg
 
-# Circuit design screenshots or exported diagrams
-Images/
-Screenshots/
+# Keep your manually added circuit/simulation images
+!*.png
+!*.jpg
+!*.jpeg
 
-# Ignore generated testbench result files
-/test_results/
-/output/
-/simulation_results/
+# Optional folders for organization
+!Images/
+!Designs/
+!Testbench/
 
-# Compiled binaries and executables
-*.exe
-*.dll
-*.so
-*.o
-
-# Python or scripts cache (if using automation)
+# Python or script cache (if automation used)
 __pycache__/
 *.pyc
