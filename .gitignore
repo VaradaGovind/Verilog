@@ -1,0 +1,89 @@
+#------------------------------------
+# Verilog / HDL Project .gitignore
+#------------------------------------
+
+# Project build and simulation files
+*.vcd
+*.wlf
+*.log
+*.jou
+*.pb
+*.rpt
+*.rpx
+*.xpr
+*.str
+*.svf
+*.key
+*.xml
+*.xrf
+*.xsa
+*.dcp
+*.dmp
+*.tcl.history
+*.tclbackup
+
+# Vivado / Xilinx specific
+*.runs/
+*.srcs/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.xdc~
+*.ip/
+*.xci
+*.xise/
+*.data/
+*.bin
+*.elf
+*.mif
+*.bd.bak
+*.bit
+
+# ModelSim / QuestaSim specific
+work/
+transcript
+vsim.wlf
+*.wlf
+*.vstf
+
+# Icarus Verilog / Verilator output
+a.out
+*.out
+*.vvp
+*.vcd
+obj_dir/
+
+# Temporary / editor files
+*~
+*.swp
+*.bak
+*.tmp
+*.DS_Store
+
+# Simulation and waveform images
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.svg
+
+# Circuit design screenshots or exported diagrams
+Images/
+Screenshots/
+
+# Ignore generated testbench result files
+/test_results/
+/output/
+/simulation_results/
+
+# Compiled binaries and executables
+*.exe
+*.dll
+*.so
+*.o
+
+# Python or scripts cache (if using automation)
+__pycache__/
+*.pyc
