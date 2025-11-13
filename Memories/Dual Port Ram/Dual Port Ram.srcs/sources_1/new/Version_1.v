@@ -10,9 +10,6 @@ module Version_1(
     output reg [7:0]Output
     );
     
-    //There is a one clock delay as we are using a different clock
-    //This is a not a True Dual Port
-    
     reg [7:0] ram[63:0];
     reg [5:0] Read_addr_reg;
     

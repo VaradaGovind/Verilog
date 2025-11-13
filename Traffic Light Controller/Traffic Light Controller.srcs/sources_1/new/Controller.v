@@ -2,17 +2,16 @@
 
 module Controller (
     input wire clk,
-    input wire rst,          // Active-high reset
-    input wire Sa,           // Sensor on Road A
-    input wire Sb,           // Sensor on Road B
-    input wire emergency_A,  // Emergency vehicle on Road A
-    input wire emergency_B,  // Emergency vehicle on Road B
-    output reg Ra, Rb,       // Red lights
-    output reg Ya, Yb,       // Yellow lights
-    output reg Ga, Gb        // Green lights
+    input wire rst,          
+    input wire Sa,           
+    input wire Sb,           
+    input wire emergency_A, 
+    input wire emergency_B,  
+    output reg Ra, Rb,       
+    output reg Ya, Yb,    
+    output reg Ga, Gb        
 );
 
-    // State encoding
     parameter S_A_GREEN  = 4'd0;
     parameter S_A_YELLOW = 4'd1;
     parameter S_B_GREEN  = 4'd2;
@@ -22,7 +21,6 @@ module Controller (
 
     reg [3:0] state, next_state;
 
-    // State update
     always @(posedge clk or posedge rst) begin
         if (rst)
             state <= S_A_GREEN;
@@ -30,16 +28,14 @@ module Controller (
             state <= next_state;
     end
 
-    // Next-state and Outputs)
     always @(*) begin
-        // Default outputs (all red)
         Ra = 1; Rb = 1;
         Ya = 0; Yb = 0;
         Ga = 0; Gb = 0;
         next_state = state;
 
         case (state)
-            // ---------- NORMAL MODE ----------
+ 
             S_A_GREEN: begin
                 Ga = 1; Rb = 1;
                 if (emergency_A)
@@ -70,17 +66,16 @@ module Controller (
                 next_state = S_A_GREEN;
             end
 
-            // ---------- EMERGENCY MODE ----------
             S_EMERG_A: begin
                 Ga = 1; Rb = 1;
                 if (!emergency_A)
-                    next_state = S_A_YELLOW;  // resume normal
+                    next_state = S_A_YELLOW;
             end
 
             S_EMERG_B: begin
                 Gb = 1; Ra = 1;
                 if (!emergency_B)
-                    next_state = S_B_YELLOW;  // resume normal
+                    next_state = S_B_YELLOW;
             end
 
             default: next_state = S_A_GREEN;

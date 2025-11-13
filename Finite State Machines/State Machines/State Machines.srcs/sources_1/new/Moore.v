@@ -10,7 +10,6 @@ module Moore(
     output reg Out
 );
 
-    // State encoding
     parameter S0 = 2'b00,
               S1 = 2'b01,
               S2 = 2'b10,
@@ -18,7 +17,6 @@ module Moore(
 
     reg [1:0] current_state, next_state;
 
-    // State register
     always @(posedge Clk or posedge Reset) begin
         if (Reset)
             current_state <= S0;
@@ -26,7 +24,6 @@ module Moore(
             current_state <= next_state;
     end
 
-    // Next-state logic
     always @(*) begin
         case (current_state)
             S0: begin
@@ -52,16 +49,15 @@ module Moore(
 
             S3: begin
                 if (In)
-                    next_state = S1;   // Overlapping detection (last 1)
+                    next_state = S1;
                 else
-                    next_state = S2;   // Got '10' again
+                    next_state = S2; 
             end
 
             default: next_state = S0;
         endcase
     end
 
-    // Output logic (depends on current state)
     always @(*) begin
         case (current_state)
             S3: Out = 1;

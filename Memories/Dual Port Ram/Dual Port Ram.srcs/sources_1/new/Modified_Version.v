@@ -12,17 +12,16 @@
         output reg [7:0]Output_b
         );
         
-        //Better Version
         
         reg [7:0] ram[63:0];
         
         always @(posedge Clk) begin
-            // Port A
+
             if (Write_en_a)
                 ram[Addr_a] <= Data_a;
             Output_a <= ram[Addr_a];
     
-            // Port B
+
             if (Write_en_b)
                 ram[Addr_b] <= Data_b;
             Output_b <= ram[Addr_b];

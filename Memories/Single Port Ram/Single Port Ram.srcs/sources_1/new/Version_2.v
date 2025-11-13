@@ -8,8 +8,6 @@ module Version_2(
     output [7:0]Output
     );
 
-    //Simultaneous Read and Write not possible
-    
     reg [7:0] ram[63:0];
     reg [5:0] Address_reg;
     

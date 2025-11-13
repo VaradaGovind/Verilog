@@ -1,7 +1,5 @@
 `timescale 1ns / 1ps
 
-// Sequence Detector is "10"
-
 module Mealy(
     input Clk,
     input Reset,
@@ -9,14 +7,12 @@ module Mealy(
     output reg Out
     );
 
-    // State encoding using parameters
     parameter S0 = 2'b00,
               S1 = 2'b01,
               S2 = 2'b10;
 
     reg [1:0] current_state, next_state;
 
-    // State register
     always @(posedge Clk) begin
         if (Reset)
             current_state <= S0;
@@ -24,7 +20,6 @@ module Mealy(
             current_state <= next_state;
     end
 
-    // Next-state and output logic (Mealy)
     always @(In,current_state) begin
         case (current_state)
             S0: begin
@@ -43,7 +38,7 @@ module Mealy(
                     Out = 0;
                 end else begin
                     next_state = S2;
-                    Out = 1;   // output triggered here
+                    Out = 1;
                 end
             end
 
