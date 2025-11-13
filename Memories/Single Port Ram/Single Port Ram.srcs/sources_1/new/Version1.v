@@ -10,14 +10,12 @@ module Version1(
     );
     
     reg [7:0] ram[63:0];
-
-    //Only One Write / One Read / One Write and Read is possible
     
     always @(posedge Clk) begin
         if (Write_en)
             ram[Write_addr] <= Data;
         if (Write_en && (Read_addr == Write_addr))
-            Output <= Data;   // Write-through
+            Output <= Data;
         else
             Output <= ram[Read_addr];
     end
