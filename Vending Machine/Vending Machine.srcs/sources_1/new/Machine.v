@@ -5,24 +5,21 @@
 module Machine(
     input clk,
     input rst,
-    input [2:0] coin_in,   // One-hot: {25,10,5}
-    input sel_valid,       // 1-cycle pulse when item selected
-    input [1:0] sel,       // Selected item index
-    output reg dispense,   // 1-cycle pulse (Mealy output)
+    input [2:0] coin_in,  
+    input sel_valid,       
+    input [1:0] sel,       
+    output reg dispense,   
     output reg [7:0] change,
     output reg [7:0] balance,
-    output reg ready       // High when idle / accepting coins
+    output reg ready       
 );
 
 parameter PRICE0 = 8'd35, PRICE1 = 8'd50, PRICE2 = 8'd65, PRICE3 = 8'd100;
 
-
-// COIN DECODER
+    
     wire [7:0] coin_value;
     coin_decoder dec(.coin_in(coin_in), .coin_value(coin_value));
 
-
-// PRICE LOOKUP
     reg [7:0] price;
     always @(*) begin
         case (sel)
@@ -34,18 +31,12 @@ parameter PRICE0 = 8'd35, PRICE1 = 8'd50, PRICE2 = 8'd65, PRICE3 = 8'd100;
         endcase
     end
 
-
-// NEXT BALANCE CALCULATION (avoid double-counting)
-
     reg [7:0] next_balance;
     always @(*) begin
         next_balance = balance;
         if (coin_value != 8'd0)
             next_balance = balance + coin_value;
     end
-
-
-// MAIN SEQUENTIAL BLOCK
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin
@@ -54,36 +45,31 @@ parameter PRICE0 = 8'd35, PRICE1 = 8'd50, PRICE2 = 8'd65, PRICE3 = 8'd100;
             dispense <= 1'b0;
             ready    <= 1'b1;
         end else begin
-            // Default values
+
             dispense <= 1'b0;
             change   <= 8'd0;
             ready    <= 1'b1;
             balance  <= next_balance;
 
-            // Selection event - Mealy behavior (immediate check)
             if (sel_valid) begin
                 if (next_balance >= price) begin
-                    // Enough balance -> dispense
                     dispense <= 1'b1;
                     change   <= next_balance - price;
-                    balance  <= 8'd0;           // reset after transaction
+                    balance  <= 8'd0;           
                     ready    <= 1'b1;
                 end else begin
-                    // Not enough money
+                    
                     dispense <= 1'b0;
                     change   <= 8'd0;
-                    ready    <= 1'b0;           // busy collecting more
+                    ready    <= 1'b0;           
                 end
             end
         end
     end
 endmodule
 
-
-// SUPPORT MODULE: COIN DECODER
-
 module coin_decoder(
-    input [2:0] coin_in,   // {25, 10, 5}
+    input [2:0] coin_in,
     output reg [7:0] coin_value
 );
     always @(*) begin
